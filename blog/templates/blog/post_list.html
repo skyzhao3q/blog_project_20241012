@@ -1,11 +1,12 @@
 {% extends 'blog/base.html' %}
 
-{% block title %}Blog Posts{% endblock %}
+{% block title %}All Blog Posts{% endblock %}
 
 {% block content %}
     <div class="row mb-4 align-items-center">
         <div class="col">
-            <h1 class="display-4 fw-bold text-primary">Blog Posts</h1>
+            <h1 class="display-4 fw-bold text-primary">All Blog Posts</h1>
+
         </div>
         <div class="col text-end">
             <a href="{% url 'post-create' %}" class="btn btn-primary btn-lg shadow-sm">
