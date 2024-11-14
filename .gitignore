@@ -1,0 +1,137 @@
+# Python bytecode
+*.py[cod]
+__pycache__/
+*.so
+*.egg
+*.egg-info/
+*.pyo
+
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+db.sqlite3
+*.sqlite3-journal
+*.dat
+*.db
+
+# Django migrations
+migrations/
+**/migrations/
+
+# Django stuff:
+*.log
+local_settings.py
+.env
+*.env
+.vscode/
+.venv
+venv/
+env/
+ENV/
+env.bak/
+env.bak/
+
+# Media files
+media/
+mediafiles/
+
+# Static files
+static/
+staticfiles/
+
+# Django secret keys
+secret_key.txt
+
+# IDE files
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Virtual environments
+venv/
+ENV/
+env/
+env.bak/
+
+# macOS files
+.DS_Store
+
+# Windows files
+Thumbs.db
+ehthumbs.db
+
+# pyenv
+.python-version
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Ignore PyCharm files
+.idea/
+*.iml
+
+# Ignore VS Code settings
+.vscode/
+
+# Coverage reports
+.coverage
+coverage.xml
+htmlcov/
+*.cover
+*.py,cover
+.tox/
+.nox/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+.cache/
+
+# Celery beat schedule file
+celerybeat-schedule
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Sphinx documentation
+docs/_build/
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# mypy
+.mypy_cache/
+
+# dotenv
+.env
+*.env
+.env.*
+!*.env.example
+
+# Pyre
+.pyre/
+
+.VSCodeCounter
