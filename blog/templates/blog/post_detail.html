@@ -1,0 +1,34 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+    <div class="card shadow">
+        <div class="card-body">
+            <h1 class="card-title display-4">{{ post.title }}</h1>
+            <div class="text-muted mb-4">
+                <small>Created: {{ post.created_date|date:"F j, Y, P" }}</small>
+                {% if post.updated_date != post.created_date %}
+                    <br>
+                    <small>Last Updated: {{ post.updated_date|date:"F j, Y, P" }}</small>
+                {% endif %}
+            </div>
+            <div class="card-text">
+                {{ post.content|linebreaks }}
+            </div>
+        </div>
+        <div class="card-footer bg-transparent">
+            <div class="btn-group">
+                <a href="{% url 'post-update' post.pk %}" class="btn btn-outline-primary">
+                    Edit Post
+                </a>
+                <a href="{% url 'post-delete' post.pk %}" class="btn btn-outline-danger">
+                    Delete Post
+                </a>
+            </div>
+            <a href="{% url 'post-list' %}" class="btn btn-outline-secondary float-end">
+                Back to Posts
+            </a>
+        </div>
+    </div>
+{% endblock %}
