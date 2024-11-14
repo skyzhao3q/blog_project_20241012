@@ -1,0 +1,179 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Blog Home{% endblock %}
+
+{% block content %}
+    <!-- Hero Section -->
+    <div class="py-5 mb-5 text-center bg-white rounded-3 shadow-sm">
+        <div class="container">
+            <h1 class="display-3 fw-bold text-primary mb-4">Welcome to Our Blog</h1>
+            <p class="lead mb-4">Share your thoughts and ideas with the world.</p>
+            <a href="{% url 'post-create' %}" class="btn btn-primary btn-lg px-4">
+                <i class="bi bi-plus-circle-fill me-2"></i>Create New Post
+            </a>
+        </div>
+    </div>
+
+    <!-- Recent Posts Section -->
+    <section class="mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="display-6 fw-bold">
+                <i class="bi bi-clock-history text-primary me-2"></i>Recent Posts
+            </h2>
+            <a href="{% url 'post-list' %}" class="btn btn-outline-primary">
+                View All Posts <i class="bi bi-arrow-right ms-2"></i>
+            </a>
+        </div>
+
+        {% if recent_posts %}
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for post in recent_posts %}
+                    <div class="col">
+                        <div class="card h-100 shadow hover-shadow border-0 rounded-3 overflow-hidden">
+                            <!-- Featured Badge -->
+                            <div class="position-absolute top-0 end-0 m-3">
+                                <span class="badge bg-primary">Recent</span>
+                            </div>
+                            
+                            <!-- Card Header with gradient -->
+                            <div class="card-header bg-gradient text-white p-3" 
+                                 style="background: linear-gradient(45deg, #3498db, #2ecc71);">
+                                <h5 class="card-title mb-0">
+                                    <a href="{% url 'post-detail' post.pk %}" class="text-decoration-none text-white stretched-link">
+                                        {{ post.title }}
+                                    </a>
+                                </h5>
+                            </div>
+                            
+                            <div class="card-body">
+                                <!-- Meta information -->
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="bg-light rounded-circle p-2 me-2">
+                                        <i class="bi bi-calendar3 text-primary"></i>
+                                    </div>
+                                    <small class="text-muted">
+                                        {{ post.created_date|date:"F j, Y" }}
+                                    </small>
+                                </div>
+                                
+                                <!-- Post excerpt -->
+                                <p class="card-text text-muted">
+                                    {{ post.content|truncatewords:25|linebreaks }}
+                                </p>
+                            </div>
+                            
+                            <!-- Card Footer -->
+                            <div class="card-footer bg-white border-0 pt-0">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <a href="{% url 'post-detail' post.pk %}" class="btn btn-outline-primary btn-sm">
+                                        Read More <i class="bi bi-arrow-right ms-1"></i>
+                                    </a>
+                                    <div class="dropdown">
+                                        <button class="btn btn-light btn-sm" type="button" data-bs-toggle="dropdown">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li>
+                                                <a class="dropdown-item" href="{% url 'post-update' post.pk %}">
+                                                    <i class="bi bi-pencil-square me-2"></i>Edit
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item text-danger" href="{% url 'post-delete' post.pk %}">
+                                                    <i class="bi bi-trash me-2"></i>Delete
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                No recent posts available. <a href="{% url 'post-create' %}" class="alert-link">Create your first post!</a>
+            </div>
+        {% endif %}
+    </section>
+
+    <!-- All Posts Section -->
+    <section>
+        <h2 class="display-6 fw-bold mb-4">
+            <i class="bi bi-collection text-primary me-2"></i>All Posts
+        </h2>
+
+        {% if all_posts %}
+            <div class="row">
+                {% for post in all_posts %}
+                    <div class="col-12 mb-3">
+                        <div class="card border-0 shadow-sm hover-shadow">
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-md-8">
+                                        <h5 class="card-title mb-2">
+                                            <a href="{% url 'post-detail' post.pk %}" class="text-decoration-none text-dark">
+                                                {{ post.title }}
+                                            </a>
+                                        </h5>
+                                        <div class="text-muted small mb-2">
+                                            <i class="bi bi-calendar3 me-2"></i>{{ post.created_date|date:"F j, Y" }}
+                                        </div>
+                                        <p class="card-text text-muted mb-0">
+                                            {{ post.content|truncatewords:30 }}
+                                        </p>
+                                    </div>
+                                    <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                                        <a href="{% url 'post-detail' post.pk %}" class="btn btn-outline-primary btn-sm me-2">
+                                            Read More <i class="bi bi-arrow-right ms-1"></i>
+                                        </a>
+                                        <div class="btn-group">
+                                            <a href="{% url 'post-update' post.pk %}" class="btn btn-light btn-sm">
+                                                <i class="bi bi-pencil"></i>
+                                            </a>
+                                            <a href="{% url 'post-delete' post.pk %}" class="btn btn-light btn-sm text-danger">
+                                                <i class="bi bi-trash"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                No posts available. <a href="{% url 'post-create' %}" class="alert-link">Create your first post!</a>
+            </div>
+        {% endif %}
+    </section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .hover-shadow {
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+    
+    .hover-shadow:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important;
+    }
+    
+    .card {
+        transition: all 0.3s ease;
+    }
+    
+    .stretched-link::after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        content: "";
+    }
+</style>
+{% endblock %}
