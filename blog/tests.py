@@ -23,5 +23,7 @@ class BlogPostListViewTests(TestCase):
 class HomePageTests(TestCase):
     def test_homepage_content(self):
         response = self.client.get(reverse('home'))
-        self.assertContains(response, 'OpenHands Created This Blog')
+        self.assertContains(response, 'welcome to my blog')
+
+
 
