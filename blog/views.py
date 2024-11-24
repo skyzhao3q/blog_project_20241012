@@ -23,6 +23,13 @@ class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/post_detail.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        post = self.object
+        context['previous_post'] = Post.objects.filter(pk__lt=post.pk).order_by('-pk').first()
+        context['next_post'] = Post.objects.filter(pk__gt=post.pk).order_by('pk').first()
+        return context
+
 class PostCreateView(CreateView):
     model = Post
     template_name = 'blog/post_form.html'
@@ -39,3 +46,4 @@ class PostDeleteView(DeleteView):
     model = Post
     template_name = 'blog/post_confirm_delete.html'
     success_url = reverse_lazy('home')
+

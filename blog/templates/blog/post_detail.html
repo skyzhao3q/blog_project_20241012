@@ -26,9 +26,22 @@
                     Delete Post
                 </a>
             </div>
-            <a href="{% url 'post-list' %}" class="btn btn-outline-secondary float-end">
+            <div class="btn-group float-end">
+                {% if previous_post %}
+                    <a href="{% url 'post-detail' previous_post.pk %}" class="btn btn-outline-secondary">
+                        Previous
+                    </a>
+                {% endif %}
+                {% if next_post %}
+                    <a href="{% url 'post-detail' next_post.pk %}" class="btn btn-outline-secondary">
+                        Next
+                    </a>
+                {% endif %}
+            </div>
+            <a href="{% url 'post-list' %}" class="btn btn-outline-secondary float-end ms-2">
                 Back to Posts
             </a>
+
         </div>
     </div>
 {% endblock %}
