@@ -20,10 +20,12 @@ class BlogPostListViewTests(TestCase):
         response = self.client.get(reverse('post-list'))
         self.assertContains(response, 'All Blog Posts')
 
+from django.test import TestCase
+from django.urls import reverse
+
 class HomePageTests(TestCase):
     def test_homepage_content(self):
         response = self.client.get(reverse('home'))
-        self.assertContains(response, 'welcome to my blog')
-
+        self.assertContains(response, 'ようこそ〜私のブログ！')
 
 
